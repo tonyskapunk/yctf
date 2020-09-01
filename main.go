@@ -20,8 +20,12 @@ func main() {
 }
 
 func render(c *gin.Context, data gin.H, templateName string) {
+	reqHeader := c.Request.Header.Get("Content-type")
+	if reqHeader == "" {
+		reqHeader = c.Request.Header.Get("Accept")
+	}
 
-	switch c.Request.Header.Get("Accept") {
+	switch reqHeader {
 	case "application/json":
 		// Respond with JSON
 		c.JSON(http.StatusOK, data["payload"])
