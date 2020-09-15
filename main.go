@@ -29,6 +29,9 @@ func render(c *gin.Context, data gin.H, templateName string) {
 	case "application/json":
 		// Respond with JSON
 		c.JSON(http.StatusOK, data["payload"])
+	case "application/x-www-form-urlencoded":
+		// Respond with JSON
+		c.JSON(http.StatusOK, data["payload"])
 	case "application/xml":
 		// Respond with XML
 		c.XML(http.StatusOK, data["payload"])
