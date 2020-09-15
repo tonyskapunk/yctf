@@ -1,0 +1,47 @@
+[
+    {
+       "ID": 0,
+       "Flag": "yctf-5f39410913126cea50a3e6fcdb7312628a869da376985fdb7ef7d0a41254a0e3", 
+       "Template": "flag0.html"
+    },
+    {
+       "ID": 1,
+       "Flag": "yctf-2766a0852b887f224d9299fe6931b3f0d7618083ef1daf5bad464a2b73dd78b4", 
+       "Template": "flag1.html"
+    },
+    {
+       "ID": 2,
+       "Flag": "yctf-b47cb19a9bee5d04716012ab83d78eaa0bffe4da73c9ffe9ffb0e7b6b4907447", 
+       "Template": "flag2.html"
+    },
+    {
+       "ID": 3,
+       "Flag": "yctf-f058e3e22b229ca1a8e236567d5f8b8a487c89683183d4494280ddd69c16d7c5",
+       "Template": "flag3.html"
+    },
+    {
+       "ID": 4,
+       "Flag": "yctf-7318b269998b37b531549cfc1cb35ff1a89b8b94662ecdcfed70afa5d23f2d46",
+       "Template": "flag4.html"
+    },
+    {
+       "ID": 5,
+       "Flag": "yctf-4f1c047dc7ec249a678551d1a05b138c769df194b47b86b2957a60df869aa671",
+       "Template": "flag5.html"
+    },
+    {
+       "ID": 6,
+       "Flag": "yctf-aa98e7983843a7dcfc47ad32dc8a5138963e89eb3ba86db8a391e20f8249f971",
+       "Template": "flag6.html"
+    },
+    {
+       "ID": 7,
+       "Flag": "yctf-f9b085a57eeef7cf483dcfad5c6b51c2d4479c86f0fc66c147948d6bfe766751",
+       "Template": "flag7.html"
+    },
+    {
+       "ID": 8,
+       "Flag": "yctf-4924383ab13310e1b4b0615298b3228c8ddb3641a65956034a33524945cbbfdc",
+       "Template": "flag8.html"
+    }
+]
