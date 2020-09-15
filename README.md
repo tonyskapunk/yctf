@@ -7,4 +7,4 @@ yocto CTF
 
 > From the Latin/Greek octo (οκτώ), meaning "eight", because it is equal to 1000^−8
 
-A Itty bitty teeny weeny Capture the Flag
+Itty bitty teeny weeny Capture the Flag web challenge
