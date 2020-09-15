@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -11,7 +12,9 @@ func getFlag0(c *gin.Context) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	title := fmt.Sprintf("flag%v", f.ID)
 
 	render(c, gin.H{
-		"payload": f.Flag}, f.Template)
+		"payload": f.Flag,
+		"title":   title}, f.Template)
 }
