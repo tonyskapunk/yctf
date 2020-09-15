@@ -1,0 +1,15 @@
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+
+<h1>IP info</h1>
+
+{{ if .isValid }}
+<h2>Access granted</h2>
+
+<p>Flag: {{.flag}}</p>
+{{ else }}
+<p>Your originating IP "{{.ip}}" is not authorized, only IPs from '10.0.0.0/8' are allowed</p>
+{{ end }}
+
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}

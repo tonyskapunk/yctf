@@ -1,0 +1,18 @@
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+
+{{ if .isValid }}
+<h1>Thanks!</h1>
+
+Your flag is: <code>{{.flag}}</code>
+
+{{ else }}
+<h1>Want to <code>GET</code> something from me?</h1>
+
+
+<p>Ask me for your <code>flag</code> and ask it nicely  <code>please</code></p>
+
+{{ end }}
+
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}

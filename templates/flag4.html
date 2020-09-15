@@ -1,0 +1,13 @@
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+
+<h1>Client info</h1>
+
+{{ if .isBot }}
+<p>Welcome bot "{{.ua}}" here is the flag: {{.flag}}</p>
+{{ else }}
+<p>You don't look like a bot "{{.ua}}", sorry can't give you the flag
+{{ end }}
+
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}
