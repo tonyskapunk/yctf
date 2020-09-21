@@ -14,4 +14,5 @@ ADD LICENSE .
 COPY --from=builder /go/src/github.com/tonyskapunk/yctf/yctf .
 RUN chown -R app:app .
 USER app
+LABEL org.opencontainers.image.source https://github.com/tonyskapunk/yctf
 CMD ["./yctf"]
