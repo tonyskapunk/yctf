@@ -16,7 +16,7 @@ func getFlag5(c *gin.Context) {
 	title := fmt.Sprintf("flag%v", f.ID)
 
 	auth, err := c.Cookie("auth")
-	if err != nil {
+	if err != nil || auth != "true" {
 		c.SetCookie("auth", "false", 300, "", "", false, false)
 		c.HTML(http.StatusUnauthorized, "401.html", gin.H{"payload": f.Flag})
 		return

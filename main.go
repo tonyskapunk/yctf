@@ -20,7 +20,7 @@ func main() {
 }
 
 func render(c *gin.Context, data gin.H, templateName string) {
-	reqHeader := c.Request.Header.Get("Content-type")
+	reqHeader := c.Request.Header.Get("Content-Type")
 	if reqHeader == "" {
 		reqHeader = c.Request.Header.Get("Accept")
 	}
