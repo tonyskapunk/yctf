@@ -2,11 +2,11 @@
 
 Adding a flag to **yctf** is easy. While the project is written using the [gin-gonic/gin](https://github.com/gin-gonic/gin) framework, you do not need extensive knowledge using the framework to add a flag. That said, some knowledge is beneficial for you to be able to create unique flags in your handlers. 
 
-Each flag will require five additions to the cod base.
+Each flag will require five additions to the code base.
 
 ## Adding Metadatda
 
-Each flag has an entry in the `flags.json` file in the following format.
+Each flag has an entry in the [flags.json](../flags.json) file in the following format.
 
 ```json
 [
@@ -21,10 +21,10 @@ Each flag has an entry in the `flags.json` file in the following format.
 ```
 
 - `ID` is the flag identifier. This must be unique.
-- `Flag` is a random string with the `yctf-` prefix that is to be found by the participant. This must be unique.
-- `Template` refers to a Go HTML Template by filename. These are stored in the `templates/` directory. This should closely mirror the format of existing templates (e.g. `flag{ID}.html`).
+- `Flag` is a sha-2 (with a digest of 256) string with the `yctf-` prefix that is to be found by the participant. This must be unique. The sha-2 string is the hash of `yctf-ID`.
+- `Template` refers to a Go HTML Template by filename. These are stored in the [templates](../templates/)directory. This should closely mirror the format of existing templates (e.g. `flag{ID}.html`).
 
-You will need to add an entry to `flags.json` for each flag that you want to introduced to `yctf`.
+You will need to add an entry to [flags.json](../flags.json) for each flag that you want to introduced to `yctf`.a
 
 ## Adding Your Handler
 
@@ -45,7 +45,7 @@ import (
 func getFlag99(c *gin.Context) {
     // Get the flag details. These are pulled from the flags.json file.
     f, err := getFlag(99)
-    // If we were unable to get the flag from teh json file, we return an error
+    // If we were unable to get the flag from the json file, we return an error
 	if err != nil {
 		log.Fatal(err)
     }
@@ -68,7 +68,7 @@ You may use other approaches to rendering so long as you handle rendering of you
 
 ## Adding Your Template
 
-The template is the next piece you need. It should live in the [templates/](../templates/) directory and should take on the same name you defined for your flag in `flags.json`. 
+The template is the next piece you need. It should live in the [templates/](../templates/) directory and should take on the same name you defined for your flag in [flags.json](../flags.json). 
 
 Templates are written using Golang's [html/template](https://golang.org/pkg/html/template/) package and are generally expected to container the **Header** and **Footer** elements `yctf` provides.
 
