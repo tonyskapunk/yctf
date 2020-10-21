@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"net/http"
 	"regexp"
 
 	"github.com/gin-gonic/gin"
@@ -22,9 +21,9 @@ func getFlag4(c *gin.Context) {
 		log.Fatal(err)
 	}
 
-	c.HTML(http.StatusOK, f.Template, gin.H{
+	render(c, gin.H{
 		"isBot": matched,
 		"ua":    ua,
 		"flag":  f.Flag,
-		"title": title})
+		"title": title}, f.Template)
 }
