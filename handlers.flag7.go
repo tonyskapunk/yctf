@@ -25,9 +25,9 @@ func getFlag7(c *gin.Context) {
 	httpStatus := http.StatusBadRequest
 
 	if c.BindQuery(&d) != nil {
-		c.HTML(httpStatus, f.Template, gin.H{
+		render(c, httpStatus, gin.H{
 			"isValid": isValid,
-			"title":   title})
+			"title":   title}, f.Template)
 		return
 	}
 
@@ -36,8 +36,8 @@ func getFlag7(c *gin.Context) {
 		httpStatus = http.StatusOK
 	}
 
-	c.HTML(httpStatus, f.Template, gin.H{
+	render(c, httpStatus, gin.H{
 		"isValid": isValid,
 		"flag":    f.Flag,
-		"title":   title})
+		"title":   title}, f.Template)
 }

@@ -18,12 +18,12 @@ func getFlag5(c *gin.Context) {
 	auth, err := c.Cookie("auth")
 	if err != nil || auth != "true" {
 		c.SetCookie("auth", "false", 300, "", "", false, false)
-		c.HTML(http.StatusUnauthorized, "401.html", gin.H{"payload": f.Flag})
+		render(c, http.StatusUnauthorized, gin.H{"payload": f.Flag}, "401.html")
 		return
 	}
 
 	if auth == "true" {
-		render(c, gin.H{
+		render(c, http.StatusOK, gin.H{
 			"payload": f.Flag,
 			"title":   title}, f.Template)
 		return

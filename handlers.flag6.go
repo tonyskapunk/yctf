@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -34,7 +35,7 @@ func getFlag6(c *gin.Context) {
 		isValid = true
 	}
 
-	render(c, gin.H{
+	render(c, http.StatusOK, gin.H{
 		"isValid": isValid,
 		"ip":      ip,
 		"flag":    f.Flag,

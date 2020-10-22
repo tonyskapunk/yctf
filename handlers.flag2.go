@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -16,6 +17,6 @@ func getFlag2(c *gin.Context) {
 
 	cookieName := fmt.Sprintf("flag%v", f.ID)
 	c.SetCookie(cookieName, f.Flag, 300, "", "", false, false)
-	render(c, gin.H{
+	render(c, http.StatusOK, gin.H{
 		"title": title}, f.Template)
 }

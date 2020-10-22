@@ -1,8 +1,6 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,7 +17,7 @@ func main() {
 	router.Run()
 }
 
-func render(c *gin.Context, data gin.H, templateName string) {
+func render(c *gin.Context, httpStatus int, data gin.H, templateName string) {
 	reqHeader := c.Request.Header.Get("Content-Type")
 	if reqHeader == "" {
 		reqHeader = c.Request.Header.Get("Accept")
@@ -28,16 +26,16 @@ func render(c *gin.Context, data gin.H, templateName string) {
 	switch reqHeader {
 	case "application/json":
 		// Respond with JSON
-		c.JSON(http.StatusOK, data["payload"])
+		c.JSON(httpStatus, data["payload"])
 	case "application/x-www-form-urlencoded":
 		// Respond with JSON
-		c.JSON(http.StatusOK, data["payload"])
+		c.JSON(httpStatus, data["payload"])
 	case "application/xml":
 		// Respond with XML
-		c.XML(http.StatusOK, data["payload"])
+		c.XML(httpStatus, data["payload"])
 	default:
 		// Respond with HTML
-		c.HTML(http.StatusOK, templateName, data)
+		c.HTML(httpStatus, templateName, data)
 	}
 
 }
