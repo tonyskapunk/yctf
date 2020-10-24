@@ -102,4 +102,14 @@ func initializeRoutes() {
 
 ## Adding Your Tests
 
-This section is coming soon.
+Finally, you'll want to add tests to make sure your flag is solvable in an expected way. Create a file `handlers.flagX_test.go` where `X` is your flag number. As an example "flag99" would look like `handlers.flag99_test.go`.
+
+Your test file should contain at least two function signatures. The primary function is your exported test handler function. This is what gets called when `go test` is run, and it should test your clue rendering. It also should handle all HTTP request recording, regardless of whether you need to make multiple requests in order to test clue rendering and success cases.
+
+The second function should test the success case for your flag. The function signature should vary, and should contain only the data necessary to test the expected flag matches the received flag.
+
+You will not have to set up a router for your tests. A router is prepared as `router` in existing tests for your use. Your tests will need to set up any recorders, however. 
+
+Refer to the test case for [flag0](../handlers.flag0_test.go) which performs a substring match against the page body to check for the existence of the flag. 
+
+In addition, several helper functions exist for enduring that core components of your clue pages render appropriately (such as the Header, Footer, etc). Other helpers such as status code and substring matches are available as well. Find those in [handlers_test.go](..handlers_test.go).
