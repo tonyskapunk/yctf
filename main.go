@@ -7,14 +7,15 @@ import (
 var router *gin.Engine
 
 func main() {
-
-	router = gin.Default()
-
-	router.LoadHTMLGlob("templates/*")
-
-	initializeRoutes()
-
+	router := setupRouter()
 	router.Run()
+}
+
+func setupRouter() *gin.Engine {
+	router = gin.Default()
+	router.LoadHTMLGlob("templates/*")
+	initializeRoutes()
+	return router
 }
 
 func render(c *gin.Context, httpStatus int, data gin.H, templateName string) {
