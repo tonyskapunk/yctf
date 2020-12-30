@@ -1,7 +1,17 @@
 package main
 
 import (
+	"net/http"
+	"os"
+
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
+)
+
+const (
+	defaultAuthKey     = "Jsj6XNRTNXv66VgkAEFGhZXbFH3jMfE9m36VXFEYv5"
+	defaultSessionName = "yctf-session"
 )
 
 var router *gin.Engine
@@ -12,7 +22,19 @@ func main() {
 }
 
 func setupRouter() *gin.Engine {
+	authKey := os.Getenv("YCTF_AUTHKEY")
+	if authKey == "" {
+		authKey = defaultAuthKey
+	}
+	sessionName := os.Getenv("YCTF_SESSION_NAME")
+	if sessionName == "" {
+		sessionName = defaultSessionName
+	}
+	store := cookie.NewStore([]byte(authKey))
+	store.Options(sessions.Options{SameSite: http.SameSiteStrictMode})
+
 	router = gin.Default()
+	router.Use(sessions.Sessions(sessionName, store))
 	router.LoadHTMLGlob("templates/*")
 	initializeRoutes()
 	return router
@@ -36,6 +58,9 @@ func render(c *gin.Context, httpStatus int, data gin.H, templateName string) {
 		c.XML(httpStatus, data["payload"])
 	default:
 		// Respond with HTML
+		session := sessions.Default(c)
+		data["score"] = session.Get("score")
+		data["flags"] = session.Get("flags")
 		c.HTML(httpStatus, templateName, data)
 	}
 
