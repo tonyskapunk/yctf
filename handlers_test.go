@@ -28,7 +28,7 @@ func TestIndexHandler(t *testing.T) {
 	testBodyContains(t, `<h1>Welcome to yCTF</h1>`, w.Body.String())
 
 	// test the session cookie named yctf-session is set
-	testCookieContains(t, "yctf-session", w.Header()["Set-Cookie"])
+	testCookieExists(t, defaultSessionName, w.Result().Cookies())
 
 	// test the score from the session is rendered
 	testBodyContains(t, `Score: [0/`, w.Body.String())
@@ -45,6 +45,19 @@ func testCookieContains(t *testing.T, want string, got []string) {
 	var found bool
 	for _, cookie := range got {
 		if strings.Contains(cookie, want) {
+			found = true
+		}
+	}
+	if !found {
+		t.Errorf("No cookie matched.\n Got: %v\nWant: %v\n", got, want)
+	}
+}
+
+// testCookieExists verifies a named cookie is found in a list of cookies
+func testCookieExists(t *testing.T, want string, got []*http.Cookie) {
+	var found bool
+	for _, cookie := range got {
+		if want == cookie.Name {
 			found = true
 		}
 	}

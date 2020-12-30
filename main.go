@@ -9,7 +9,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-const defaultAuthKey = "Jsj6XNRTNXv66VgkAEFGhZXbFH3jMfE9m36VXFEYv5"
+const (
+	defaultAuthKey     = "Jsj6XNRTNXv66VgkAEFGhZXbFH3jMfE9m36VXFEYv5"
+	defaultSessionName = "yctf-session"
+)
 
 var router *gin.Engine
 
@@ -19,15 +22,19 @@ func main() {
 }
 
 func setupRouter() *gin.Engine {
-	authKey := os.Getenv("AUTHKEY")
+	authKey := os.Getenv("YCTF_AUTHKEY")
 	if authKey == "" {
 		authKey = defaultAuthKey
+	}
+	sessionName := os.Getenv("YCTF_SESSION_NAME")
+	if sessionName == "" {
+		sessionName = defaultSessionName
 	}
 	store := cookie.NewStore([]byte(authKey))
 	store.Options(sessions.Options{SameSite: http.SameSiteStrictMode})
 
 	router = gin.Default()
-	router.Use(sessions.Sessions("yctf-session", store))
+	router.Use(sessions.Sessions(sessionName, store))
 	router.LoadHTMLGlob("templates/*")
 	initializeRoutes()
 	return router

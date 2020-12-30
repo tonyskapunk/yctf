@@ -11,6 +11,7 @@ func showIndex(c *gin.Context) {
 	var score int
 
 	flags := getAllFlags()
+	// Only one session exists and is the default
 	session := sessions.Default(c)
 
 	s := session.Get("score")
@@ -21,7 +22,9 @@ func showIndex(c *gin.Context) {
 	if f == nil {
 		session.Set("flags", len(flags))
 	}
-	session.Save()
+	if s == nil || f == nil {
+		session.Save()
+	}
 
 	render(c, http.StatusOK, gin.H{
 		"title":   "yCTF",
