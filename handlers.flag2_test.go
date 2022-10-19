@@ -41,7 +41,7 @@ func testFlag2Success(t *testing.T, c []*http.Cookie) {
 	fkv := strings.Split(c[0].String(), ";")[0]
 	cookieVal := strings.Split(fkv, "=")[1]
 
-	if f.Flag != cookieVal {
+	if f.Flag.String() != cookieVal {
 		t.Errorf("Unable to find flag in expected cookie %s.\n Got: %s\nWant: %s",
 			cookieName, cookieVal, f.Flag)
 	}

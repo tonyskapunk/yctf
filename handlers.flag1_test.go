@@ -35,7 +35,7 @@ func testFlag1Success(t *testing.T, headers http.Header) {
 		t.Error("The flag at the provided ID was not found: ", id)
 	}
 
-	if f.Flag != headers[header][0] {
+	if f.Flag.String() != headers[header][0] {
 		t.Errorf("Unable to find flag in expected response header %s.\n Got: %s\nWant %s",
 			header, headers[header][0], f.Flag)
 	}

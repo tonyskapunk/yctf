@@ -1,43 +1,29 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"log"
-	"os"
+
+	"github.com/tonyskapunk/yctf/pkg/flag"
 )
 
-type flag struct {
-	ID       int
-	Flag     string
+// challenge is a specific task to be accomplished, returning a flag once
+// completed.
+type challenge struct {
+	// ID is the internal reference to the challenge's ID.
+	ID int
+	// Flag is what's captured.
+	Flag *flag.Flag
+	// Template is what's rendered
 	Template string
 }
 
-// getAllFlags gets all the flags from a data source
-func getAllFlags() []flag {
-	var flags []flag
-
-	data, err := os.ReadFile("./flags.json")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = json.Unmarshal([]byte(data), &flags)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return flags
-}
-
 // getFlag returns a flag on the specified index or an error
-func getFlag(n int) (flag, error) {
-	var f flag
-	flags := getAllFlags()
+func getFlag(n int) (challenge, error) {
+	var c challenge
 
-	if n < 0 || n > len(flags) {
-		return f, fmt.Errorf("Index out of range: %v", n)
+	if n < 0 || n > len(challenges) {
+		return c, fmt.Errorf("index out of range: %v", n)
 	}
 
-	return flags[n], nil
+	return challenges[n], nil
 }
