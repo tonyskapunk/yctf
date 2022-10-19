@@ -12,7 +12,7 @@ import (
 func showIndex(c *gin.Context) {
 	var score int
 
-	flags := getAllFlags()
+	flags := challenges
 	// Only one session exists and is the default
 	session := sessions.Default(c)
 

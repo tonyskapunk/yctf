@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 	"os"
@@ -8,20 +9,55 @@ import (
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
+	"github.com/tonyskapunk/yctf/pkg/flag"
 )
 
 const (
-	defaultAuthKey     = "Jsj6XNRTNXv66VgkAEFGhZXbFH3jMfE9m36VXFEYv5"
-	defaultSessionName = "yctf-session"
+	defaultAuthKey         = "Jsj6XNRTNXv66VgkAEFGhZXbFH3jMfE9m36VXFEYv5"
+	defaultSessionName     = "yctf-session"
+	defaultFlagFactorySeed = "abcdefghijklmnopqrstuvwxyz"
+	defaultFlagFile        = "flags.json"
 )
 
 var router *gin.Engine
+var challenges []challenge
 
 func main() {
 	router := setupRouter()
 	if err := router.Run(); err != nil {
 		log.Fatal(err)
 	}
+}
+
+func init() {
+	setupFlagFactory()
+	generateFlags()
+}
+func setupFlagFactory() {
+	// TODO: randomize this, or accept the seed from config.
+	flag.SetFactory(flag.NewFactory(defaultFlagFactorySeed))
+}
+
+func generateFlags() {
+	var ch []challenge
+
+	data, err := os.ReadFile(defaultFlagFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = json.Unmarshal([]byte(data), &ch)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for i, c := range ch {
+		// For now, use the template as the input because it's required
+		// for all challenges.
+		ch[i].Flag = flag.NewFlag([]byte(c.Template))
+	}
+
+	challenges = ch
 }
 
 func setupRouter() *gin.Engine {
