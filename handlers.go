@@ -3,6 +3,8 @@ package main
 import (
 	"net/http"
 
+	"log"
+
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
@@ -23,7 +25,9 @@ func showIndex(c *gin.Context) {
 		session.Set("flags", len(flags))
 	}
 	if s == nil || f == nil {
-		session.Save()
+		err := session.Save()
+		// TODO: Identify proper path to take when a session save doesn't work
+		log.Println("WARN unable to save session:", err)
 	}
 
 	render(c, http.StatusOK, gin.H{

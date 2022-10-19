@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"os"
 
@@ -18,7 +19,9 @@ var router *gin.Engine
 
 func main() {
 	router := setupRouter()
-	router.Run()
+	if err := router.Run(); err != nil {
+		log.Fatal(err)
+	}
 }
 
 func setupRouter() *gin.Engine {
