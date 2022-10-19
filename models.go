@@ -6,24 +6,21 @@ import (
 	"github.com/tonyskapunk/yctf/pkg/flag"
 )
 
-// challenge is a specific task to be accomplished, returning a flag once
-// completed.
-type challenge struct {
-	// ID is the internal reference to the challenge's ID.
-	ID int
-	// Flag is what's captured.
-	Flag *flag.Flag
-	// Template is what's rendered
+type flagConstruct struct {
+	ID       int
+	Flag     string
 	Template string
 }
 
-// getFlag returns a flag on the specified index or an error
-func getFlag(n int) (challenge, error) {
-	var c challenge
+// get Flag returns a generated flag from a seed
+func getFlag(i int) (flagConstruct, error) {
+	// TODO: Use the session as the seed
+	seed := "my-random-seed-from-session"
 
-	if n < 0 || n > len(challenges) {
-		return c, fmt.Errorf("index out of range: %v", n)
-	}
+	fact := flag.NewFactory(seed)
+	f := fact.NewFlag([]byte(fmt.Sprintf("%d", i)))
+	t := fmt.Sprintf("flag%d.html", i)
+	var fc = flagConstruct{ID: i, Flag: f.String(), Template: t}
 
-	return challenges[n], nil
+	return fc, nil
 }
