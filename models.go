@@ -3,8 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
+	"os"
 )
 
 type flag struct {
@@ -17,7 +17,7 @@ type flag struct {
 func getAllFlags() []flag {
 	var flags []flag
 
-	data, err := ioutil.ReadFile("./flags.json")
+	data, err := os.ReadFile("./flags.json")
 	if err != nil {
 		log.Fatal(err)
 	}
