@@ -16,6 +16,6 @@ func getFlag3(c *gin.Context) {
 	title := fmt.Sprintf("flag%v", f.ID)
 
 	render(c, http.StatusOK, gin.H{
-		"payload": f.Flag.String(),
+		"payload": f.Flag,
 		"title":   title}, f.Template)
 }

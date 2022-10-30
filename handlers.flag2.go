@@ -16,7 +16,7 @@ func getFlag2(c *gin.Context) {
 	title := fmt.Sprintf("flag%v", f.ID)
 
 	cookieName := fmt.Sprintf("flag%v", f.ID)
-	c.SetCookie(cookieName, f.Flag.String(), 300, "", "", false, false)
+	c.SetCookie(cookieName, f.Flag, 300, "", "", false, false)
 	render(c, http.StatusOK, gin.H{
 		"title": title}, f.Template)
 }
