@@ -20,9 +20,9 @@ func TestFlag6Handler(t *testing.T) {
 	testCommonTemplatesRender(t, w.Body.String())
 
 	// test the body of the index
-	testBodyContains(t, `only IPs from '10.0.0.0/8' are allowed</p>`, w.Body.String())
+	testBodyContains(t, `only IPs from '11.0.0.0/8' are allowed</p>`, w.Body.String())
 
-	req.Header.Set("x-forwarded-for", "10.0.0.1")
+	req.Header.Set("x-forwarded-for", "11.0.0.1")
 	router.ServeHTTP(w, req)
 	testFlag6Success(t, w.Body.String())
 }

@@ -5,15 +5,15 @@
 
 <h1>Welcome to yCTF</h1>
 
-  <h3>Flags have the form: <code>yctf-fedcba9876543210..</code></h3>
-  <!--Loop over the payload variable, which is the list of exercises-->
-  {{range .payload }}
-    <!--Create the link for the exercise based on its URL-->
-    <a href="./flag{{.ID}}">
-      <!--Display the Name of the exercise-->
-      <h3>flag{{.ID}}</h3>
-    </a>
-  {{end}}
+<h3>Flags have the form: <code>yctf-fedcba9876543210..</code></h3>
+<!--Loop over the len of flags-->
+{{ range $index,$value :=.payload -}}
+<!--Create the link for the exercise based on its URL-->
+<a href="./flag{{$index}}">
+  <!--Display the Name of the exercise -->
+  <h3>flag{{$index}}</h3>
+</a>
+{{end}}
 
 <!--Embed the footer.html template at this location-->
 {{ template "footer.html" .}}

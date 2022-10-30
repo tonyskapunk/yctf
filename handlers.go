@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
+	"path/filepath"
 
 	"log"
 
@@ -12,7 +14,11 @@ import (
 func showIndex(c *gin.Context) {
 	var score int
 
-	flags := getAllFlags()
+	flag_templates, err := filepath.Glob("./templates/flag*.html")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 	// Only one session exists and is the default
 	session := sessions.Default(c)
 
@@ -20,9 +26,9 @@ func showIndex(c *gin.Context) {
 	if s == nil {
 		session.Set("score", score)
 	}
-	f := session.Get("flags")
+	f := session.Get("total_flags")
 	if f == nil {
-		session.Set("flags", len(flags))
+		session.Set("total_flags", len(flag_templates))
 	}
 	if s == nil || f == nil {
 		err := session.Save()
@@ -32,7 +38,7 @@ func showIndex(c *gin.Context) {
 
 	render(c, http.StatusOK, gin.H{
 		"title":   "yCTF",
-		"payload": flags}, "index.html")
+		"payload": flag_templates}, "index.html")
 }
 
 // TODO:

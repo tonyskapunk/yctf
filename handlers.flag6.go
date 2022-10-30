@@ -16,7 +16,7 @@ func getFlag6(c *gin.Context) {
 	}
 	title := fmt.Sprintf("flag%v", f.ID)
 
-	validNetwork := "10.0.0.0/8"
+	validNetwork := "11.0.0.0/8"
 	_, subnet, _ := net.ParseCIDR(validNetwork)
 
 	var ip string
