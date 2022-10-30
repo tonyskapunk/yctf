@@ -43,7 +43,7 @@ func testFlag3Success(t *testing.T, jsonbody string) {
 	// the json response from the serve is quoted, we need to remove that to test.
 	jsonflag := strings.Trim(jsonbody, `"`)
 
-	if f.Flag.String() != jsonflag {
+	if f.Flag != jsonflag {
 		t.Errorf("Unable to find flag in expected JSON payload.\n Got: %s\nWant %s",
 			jsonflag, f.Flag)
 	}

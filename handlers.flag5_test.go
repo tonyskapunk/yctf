@@ -40,5 +40,5 @@ func testFlag5Success(t *testing.T, body string) {
 		t.Error("The flag at the provided ID was not found: ", id)
 	}
 
-	testBodyContains(t, f.Flag.String(), body)
+	testBodyContains(t, f.Flag, body)
 }
