@@ -37,25 +37,12 @@ podman run \
   --env GIN_MODE=release \
   --publish 8080:8080 \
   docker.pkg.github.com/tonyskapunk/yctf/yctf:latest
-
-## OR
-docker run \
-  --name yctf \
-  --rm \
-  --detach \
-  --env GIN_MODE=release \
-  --publish 8080:8080 \
-  yctf:latest
 ```
 
 ### Build locally
 
 ```bash
 podman build -t yctf:latest .
-
-## OR
-
-docker build -t yctf:latest .
 ```
 
 ## Run the code
