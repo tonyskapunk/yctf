@@ -22,8 +22,8 @@ The main reason behind this super short CTF is to learn and practice [go](https:
 Images are available here:
 
 - quay.io/tonyskapunk/yctf
-- docker.pkg.github.com/tonyskapunk/yctf/yctf
 - ghcr.io/tonyskapunk/yctf
+- docker.pkg.github.com/tonyskapunk/yctf/yctf
 
 ## Run in a container
 
